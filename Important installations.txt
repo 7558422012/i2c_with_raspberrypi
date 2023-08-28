@@ -1,0 +1,18 @@
+Mysql
+vscode
+dotnet
+
+vscode installation commands:
+sudo apt update
+wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+sudo sh -c 'echo "deb [arch=armhf,arm64] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+sudo apt update
+sudo apt install code
+
+SQL installation:-
+sudo apt install mariadb-server
+
+Website to help use:
+https://bytesofgigabytes.com/raspberrypi/how-to-install-mysql-database-on-rapberry-pi/
+

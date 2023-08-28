@@ -1,0 +1,29 @@
+import machine
+import time
+import sys
+from machine import I2C, Pin
+
+i2c = I2C(scl=Pin(22), sda=Pin(21))
+AT24C2 = 0x50
+
+if not AT24C2 in i2c.scan():
+    print("Could not find AT24C2")
+    sys.exit()
+
+def erase_AT24C2():
+    page_size = 32  # Page size of the EEPROM
+    num_pages = 8192  # Total number of pages in the EEPROM (AT24C256)
+    
+    for page_address in range(0, num_pages, page_size):
+        # Create a page of 0xFF values
+        erase_data = bytearray([0xFF] * page_size)
+        
+        # Write the erase data to the EEPROM
+        address_bytes = bytearray([page_address >> 8, page_address & 0xFF])
+        i2c.writeto_mem(AT24C2, page_address, erase_data)
+        time.sleep_ms(10)  # Delay to allow the EEPROM to process the write
+
+    print("EEPROM erased successfully!")
+
+if __name__ == "__main__":
+    erase_AT24C2()
